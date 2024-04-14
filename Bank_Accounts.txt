@@ -1,0 +1,9 @@
+Name_Surname,IBAN,Currency,Amount
+Andrei Fulga,RO1234abdnfhutABCD,euro,3340
+Irina Popescu,RO5634ghtdhutiHGRE,ron,5600
+Raul Enescu,RO1243sjhdyureKDBT,ron,8900
+Andrei Fulga,RO2763sjhdytgfKTYF,ron,4534
+Ana Laur,RO4206latangurATAA,yen,4
+Andrei Fulga,RO1777ldthuivdGRBP,yen,981200.23
+John Cena,RO3984hjsdyturLANK,dollars,17890
+Alex Dumitru,RO1234abcdefghABCD,ron,0
