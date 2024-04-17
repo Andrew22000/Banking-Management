@@ -23,3 +23,5 @@ void Other_choice();
 void Invalid_input();
 
 void Exit_statement();
+
+void Delete_Account_print();
