@@ -23,10 +23,11 @@ void Account_choices() {
 }
 
 void More_accounts_output(char **array,int nr_accounts) {
-    printf("User logged in successfully! Choose which account do you want to work in!\n");
+    printf("User logged in successfully! These are your accounts!\n");
     for(int i = 0; i < nr_accounts; i++){
         printf("%d.%s",i+1,array[i]);
     }
+    printf("Please enter the number corresponding to the account you want to work in!\n");
 }
 
 void Print_amount(char *array) {
@@ -62,6 +63,11 @@ void Invalid_input() {
 
 void Other_choice() {
     printf("Do you want to do anything else? If yes, please enter 'yes'. If no, enter any other input!\n");
+}
+
+void Delete_Account_print() {
+    printf("Account deleted successfully!\n");
+    printf("Thanks for choosing Horizon Trust Bank!\n");
 }
 
 
