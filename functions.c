@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "functions.h"
-#include "File_handling.h"
+#include "Account_handling.h"
 #include "output.h"
 
 // 1. spatii la inceput
@@ -279,6 +279,114 @@ char *change_Amount(char **Array, char *placeholder, const char *New_amount, int
     placeholder[pos] = '\n';
     placeholder[pos + 1] = '\0';
     return placeholder;
+}
+
+char *Remaining_Amount(char* account, char *Amount) {
+    double new_amount = Take_Amount_as_Double(account);
+
+    char* p;
+
+    double transaction_amount = strtod(Amount,&p);
+
+    new_amount -= transaction_amount;
+
+    sprintf(Amount, "%lf", new_amount);
+
+    for (int i = strlen(Amount) - 1; i >= 0; i--) {
+
+        if (Amount[i] == '.') {
+            Amount[i] = '\0';
+            //Amount[i+1] = '\0';
+            break;
+
+        } else if (Amount[i] != '0') {
+            Amount[i+1] = '\0';
+            //Amount[i+2] = '\0';
+            break;
+        }
+
+        Amount[i] = '\0';
+    }
+
+    return Amount;
+
+
+}
+
+double Take_Amount_as_Double(char *account) {
+    char* ptr;
+
+    double amount = strtod(Take_Amount(account),&ptr);
+
+    return amount;
+}
+
+
+char *Transaction(char **Array, char *placeholder, const char *Amount, int right_account, int transaction_account) {
+
+    char* p;
+
+    double amount_after_transaction = Take_Amount_as_Double(Array[transaction_account]);
+
+    double amount_added = strtod(Amount,&p);
+
+
+    if(strcmp(Take_Currency(Array[right_account]),"ron") == 0){
+        if(strcmp(Take_Currency(Array[transaction_account]),"dollars") == 0)
+            amount_added *= 0.21;
+
+        else if(strcmp(Take_Currency(Array[transaction_account]),"euro") == 0)
+            amount_added *= 0.20;
+
+        else if(strcmp(Take_Currency(Array[transaction_account]),"yen") == 0)
+            amount_added *= 32.80;
+
+    }
+
+    else if(strcmp(Take_Currency(Array[right_account]),"dollars") == 0){
+        if(strcmp(Take_Currency(Array[transaction_account]),"ron") == 0)
+            amount_added *= 4.67;
+
+        else if(strcmp(Take_Currency(Array[transaction_account]),"euro") == 0)
+            amount_added *= 0.94;
+
+        else if(strcmp(Take_Currency(Array[transaction_account]),"yen") == 0)
+            amount_added *= 153.28;
+
+    }
+
+    else if(strcmp(Take_Currency(Array[right_account]),"euro") == 0){
+        if(strcmp(Take_Currency(Array[transaction_account]),"ron") == 0)
+            amount_added *= 4.99;
+
+        else if(strcmp(Take_Currency(Array[transaction_account]),"dollars") == 0)
+            amount_added *= 1.07;
+
+        else if(strcmp(Take_Currency(Array[transaction_account]),"yen") == 0)
+            amount_added *= 163.57;
+    }
+
+    else if(strcmp(Take_Currency(Array[right_account]),"yen") == 0){
+        if(strcmp(Take_Currency(Array[transaction_account]),"ron") == 0)
+            amount_added *= 0.03;
+
+        else if(strcmp(Take_Currency(Array[transaction_account]),"dollars") == 0)
+            amount_added *= 0.0065;
+
+        else if(strcmp(Take_Currency(Array[transaction_account]),"euro") == 0)
+            amount_added *= 0.0061;
+    }
+
+    amount_after_transaction += amount_added;
+
+    sprintf(Amount,"%lf",amount_after_transaction);
+
+
+
+    strcpy(Array[transaction_account],change_Amount(Array,placeholder,Amount,right_account));
+
+    return Array[transaction_account];
+
 }
 
 
