@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "functions.h"
-#include "File_handling.h"
+#include "Account_handling.h"
 #include "output.h"
 
 // TODO
@@ -202,7 +202,8 @@ int main() {
 
                         char* Transaction_IBAN = malloc(sizeof(All_Accounts[right_account]));
                         char* Transaction_amount = malloc(sizeof(All_Accounts[right_account]));
-                        //char* placeholder5 = malloc(sizeof(All_Accounts[right_account]) + 1);
+                        char* placeholder5 = malloc(sizeof(All_Accounts[right_account]) + 1);
+                        char* Transaction_amount_copy = malloc(sizeof(All_Accounts[right_account]));
 
                         while(1){
                             scanf("%s",Transaction_IBAN);
@@ -231,8 +232,16 @@ int main() {
                                     else
                                         break;
                                 }
-                                    printf("Transaction made successfully!\n");
-                                    break;
+
+                                strcpy(Transaction_amount_copy,Transaction_amount);
+
+                                Transaction(All_Accounts,placeholder5,Transaction_amount,right_account,transaction_account);
+
+                                strcpy(All_Accounts[right_account], change_Amount(All_Accounts,placeholder5,
+                                                                                  Remaining_Amount(All_Accounts[right_account],Transaction_amount_copy),right_account));
+
+                                printf("Transaction made successfully!\n");
+                                break;
 
 
                             }
@@ -441,7 +450,8 @@ int main() {
 
                     char* Transaction_IBAN = malloc(sizeof(All_Accounts[right_account]));
                     char* Transaction_amount = malloc(sizeof(All_Accounts[right_account]));
-                    //char* placeholder5 = malloc(sizeof(All_Accounts[right_account]) + 1);
+                    char* placeholder5 = malloc(sizeof(All_Accounts[right_account]) + 1);
+                    char* Transaction_amount_copy = malloc(sizeof(All_Accounts[right_account]));
 
                     while(1){
                         scanf("%s",Transaction_IBAN);
@@ -470,6 +480,15 @@ int main() {
                                 else
                                     break;
                             }
+
+                            strcpy(Transaction_amount_copy,Transaction_amount);
+
+                            Transaction(All_Accounts,placeholder5,Transaction_amount,right_account,transaction_account);
+
+                            strcpy(All_Accounts[right_account], change_Amount(All_Accounts,placeholder5,
+                                                                              Remaining_Amount(All_Accounts[right_account],Transaction_amount_copy),right_account));
+
+
                             printf("Transaction made successfully!\n");
                             break;
 
