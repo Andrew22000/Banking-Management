@@ -70,7 +70,11 @@ char* exchange_rate_Amount(const char* account, char* new_currency);
 
 char* change_Amount(char** Array, char* placeholder, const char* New_amount, int right_account);
 
+char* Remaining_Amount(char* account,char* Amount);
+
 char* Transaction(char** Array,char* placeholder, const char* Amount, int right_account, int transaction_account);
+
+double Take_Amount_as_Double(char* account);
 
 
 
