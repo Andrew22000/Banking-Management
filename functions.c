@@ -322,7 +322,7 @@ double Take_Amount_as_Double(char *account) {
 }
 
 
-char *Transaction(char **Array, char *placeholder, const char *Amount, int right_account, int transaction_account) {
+char *Transaction(char **Array, char *placeholder, char *Amount, int right_account, int transaction_account) {
 
     char* p;
 
@@ -381,9 +381,23 @@ char *Transaction(char **Array, char *placeholder, const char *Amount, int right
 
     sprintf(Amount,"%lf",amount_after_transaction);
 
+    for (int i = strlen(Amount) - 1; i >= 0; i--) {
 
+        if (Amount[i] == '.') {
+            Amount[i] = '\0';
+            //Amount[i+1] = '\0';
+            break;
 
-    strcpy(Array[transaction_account],change_Amount(Array,placeholder,Amount,right_account));
+        } else if (Amount[i] != '0') {
+            Amount[i+1] = '\0';
+            //Amount[i+2] = '\0';
+            break;
+        }
+
+        Amount[i] = '\0';
+    }
+
+    strcpy(Array[transaction_account],change_Amount(Array,placeholder,Amount,transaction_account));
 
     return Array[transaction_account];
 
